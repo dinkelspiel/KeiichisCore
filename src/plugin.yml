@@ -1,0 +1,57 @@
+name: keiichiscore
+version: 1.0
+author: willmexe
+main: com.willmexe.keiichiscore.KeiichisCore
+api-version: 1.17
+depend: [ProtocolLib]
+
+commands:
+  test:
+    description: Your description
+    usage: /test
+    permission: keiichiscore.test
+  chattitle:
+    description: Your description
+    usage: /chattitle
+    permission: keiichiscore.chattitle
+  chatpalette:
+    description: Your description
+    usage: /chatpalette
+    permission: keiichiscore.chatpalette
+  home:
+    description: Home gui
+    usage: /home
+    permission: keiichiscore.home
+  sethome:
+    description: Set home
+    usage: /sethome
+    permission: keiichiscore.sethome
+  removehome:
+    description: Remove home
+    aliases: [delhome]
+    usage: /removehome
+    permission: keiichiscore.removehome
+  gohome:
+    description: Go home
+    usage: /gohome
+    permission: keiichiscore.gohome
+  savehome:
+    description: Save homes
+    usage: /Savehome
+    permission: keiichiscore.savehome
+  save:
+    description: save
+    usage: /save
+    permission: keiichiscore.save
+  spawn:
+    description: Teleport to spawn
+    usage: /spawn
+    permission: keiichiscore.spawn
+  setspawn:
+    description: Set spawn location
+    usage: /setspawn
+    permission: keiichiscore.setspawn
+  craft:
+    description: craft
+    usage: /craft
+    permission: keiichiscore.craft
