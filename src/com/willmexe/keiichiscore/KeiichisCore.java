@@ -8,6 +8,7 @@ import com.willmexe.keiichiscore.items.ItemCraftBook;
 import com.willmexe.keiichiscore.tabcompletes.TabCompleterGoHome;
 import com.willmexe.keiichiscore.tabcompletes.TabCompleterRemoveHome;
 import org.bukkit.Bukkit;
+import org.bukkit.Material;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -55,6 +56,8 @@ public class KeiichisCore extends JavaPlugin {
         GlobalVariables.init();
         ItemCraftBook.init();
         GuiCraftBook.init();
+
+        GuiCraftBook.add("§fBuilder's Wand", Material.NETHERITE_AXE, "\uEFD8");
 
         getServer().getConsoleSender().sendMessage(GlobalVariables.title + "Initialized");
 
