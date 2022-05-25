@@ -1,4 +1,3 @@
-
 package com.willmexe.keiichiscore.commands;
 
 import com.willmexe.keiichiscore.GlobalVariables;
@@ -12,21 +11,12 @@ import org.bukkit.entity.Player;
 
 import java.util.HashMap;
 
-public class CommandSetHome implements CommandExecutor {
+public class CommandLoadConfig implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        if(!(sender instanceof Player)) {
-            sender.sendMessage(GlobalVariables.error_prefix + "You must run this command as player!");
-            return true;
-        }
-        if(args.length < 1) {
-            sender.sendMessage(GlobalVariables.error_prefix + "You must supply atleast one argument!");
-            return true;
-        }
-
-        Player player = (Player) sender;
-
-        ClassHome.setHome(player, args[0]);
+        ClassHome.loadHomes();
+        GlobalVariables.init();
+        sender.sendMessage(GlobalVariables.success_prefix + "Loaded the config!");
         return true;
     }
 }

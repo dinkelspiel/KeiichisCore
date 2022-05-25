@@ -28,7 +28,11 @@ public class ClassHome {
     }
 
     public static void setHome(Player player, String home) {
-        player.performCommand("sethome " + home);
+        if(GlobalVariables.player_homes.get(player.getUniqueId().toString()) == null) {
+            GlobalVariables.player_homes.put(player.getUniqueId().toString(), new HashMap<String, Location>());
+        }
+        GlobalVariables.player_homes.get(player.getUniqueId().toString()).put(home, player.getLocation());
+        player.sendMessage(GlobalVariables.success_prefix + "You have set your home " + home);
     }
     public static void delHome(Player player) {
         GuiDelHome gui = new GuiDelHome();
@@ -88,7 +92,7 @@ public class ClassHome {
 
                 GlobalVariables.player_homes.get(i).put((String) j, location);
 
-//                Bukkit.getConsoleSender().sendMessage(GlobalVariables.success_prefix + "Loaded home " + j + "!");
+                KeiichisCore.getPlugin().getServer().broadcastMessage(GlobalVariables.success_prefix + "Loaded home " + j + "!");
             }
         }
     }

@@ -55,3 +55,7 @@ commands:
     description: craft
     usage: /craft
     permission: keiichiscore.craft
+  loadconfig:
+    description: load the config
+    usage: /loadconfig
+    permission: keiichiscore.loadconfig

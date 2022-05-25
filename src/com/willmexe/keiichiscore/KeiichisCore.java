@@ -39,6 +39,7 @@ public class KeiichisCore extends JavaPlugin {
 
         getCommand("spawn").setExecutor(new CommandSpawn());
         getCommand("setspawn").setExecutor(new CommandSetSpawn());
+        getCommand("loadconfig").setExecutor(new CommandLoadConfig());
 
         getCommand("save").setExecutor(new CommandSave());
 

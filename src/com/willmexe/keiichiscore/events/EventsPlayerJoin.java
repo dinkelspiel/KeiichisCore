@@ -16,6 +16,7 @@ public class EventsPlayerJoin implements Listener {
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent e) {
         Player player = e.getPlayer();
+        player.setResourcePack("https://github.com/shykeiichi/plugin-resourcepack/blob/main/release.zip?raw=true");
         if(GlobalVariables.player_chat_palettes.get(player.getUniqueId().toString()) == null) {
             GlobalVariables.player_chat_palettes.put(player.getUniqueId().toString(), new ClassChatPalette("§f", "§f", "§f"));
         }
