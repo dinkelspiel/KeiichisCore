@@ -59,3 +59,28 @@ commands:
     description: load the config
     usage: /loadconfig
     permission: keiichiscore.loadconfig
+  prefixsync:
+    description: sync prefixes
+    usage: /prefixsync
+    permission: keiichiscore.prefixsync
+  loadresources:
+    description: load resources
+    usage: /loadresources
+    permission: keiichiscore.loadresources
+  pronouns:
+    description: pronouns
+    usage: /pronouns
+    aliases: [pronoun]
+    permission: keiichiscore.pronouns
+  syncpronouns:
+    description: sync pronouns
+    usage: /syncpronouns
+    permission: keiichiscore.syncpronouns
+  setfacing:
+    description: set facing
+    usage: setfacing <facing>
+    permission: keiichiscore.setfacing
+  giveprop:
+    description: give prop
+    usage: giveprop <player> <prop>
+    permission: keiichiscore.giveprop

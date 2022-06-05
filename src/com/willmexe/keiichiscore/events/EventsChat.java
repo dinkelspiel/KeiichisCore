@@ -3,6 +3,7 @@ package com.willmexe.keiichiscore.events;
 import com.willmexe.keiichiscore.GlobalVariables;
 import com.willmexe.keiichiscore.classes.ClassChatPalette;
 import com.willmexe.keiichiscore.classes.ClassHome;
+import com.willmexe.keiichiscore.classes.ClassPronouns;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -21,6 +22,33 @@ public class EventsChat implements Listener {
         if(GlobalVariables.player_chat_input.get(player.getUniqueId().toString()) == "sethome") {
             ClassHome.setHome(player, e.getMessage());
             GlobalVariables.player_chat_input.put(player.getUniqueId().toString(), "");
+            return;
+        } else if(GlobalVariables.player_chat_input.get(player.getUniqueId().toString()) == "custom_pronoun") {
+            GlobalVariables.player_pronouns.put(player.getUniqueId().toString(), e.getMessage());
+            player.sendMessage(GlobalVariables.success_prefix + "Your global pronouns are now '" + e.getMessage() + "'!");
+            GlobalVariables.player_chat_input.put(player.getUniqueId().toString(), "");
+            ClassPronouns.setPronouns(player);
+            return;
+        } else if(GlobalVariables.player_chat_input.get(player.getUniqueId().toString()) == "custom_pronoun_color"){
+            GlobalVariables.player_color_pronouns.put(player.getUniqueId().toString(), e.getMessage());
+
+            String color = "§" + e.getMessage();
+            String pronoun = GlobalVariables.player_pronouns.get(player.getUniqueId().toString());
+
+            String fixed_title = "\uEF73";
+            for(var i = 0; i < pronoun.length(); i++) {
+                fixed_title += "\uF801" + GlobalVariables.letter_lookup.get(String.valueOf(pronoun.charAt(i)));
+                if(GlobalVariables.letter_lookup.get(String.valueOf(pronoun.charAt(i))) == null) {
+                    player.sendMessage(GlobalVariables.error_prefix + "Invalid character '" + String.valueOf(pronoun.charAt(i)) + "' was used! Please remove this character and try again.");
+                    return;
+                }
+            }
+            fixed_title += "\uF801\uEF73";
+            fixed_title += "\uF823";
+
+            player.sendMessage(GlobalVariables.success_prefix + "Your global pronouns now looks like '" + color + fixed_title + "§a'!");
+            GlobalVariables.player_chat_input.put(player.getUniqueId().toString(), "");
+            ClassPronouns.setPronouns(player);
             return;
         }
 

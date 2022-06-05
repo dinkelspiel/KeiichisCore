@@ -92,7 +92,7 @@ public class ClassHome {
 
                 GlobalVariables.player_homes.get(i).put((String) j, location);
 
-                KeiichisCore.getPlugin().getServer().broadcastMessage(GlobalVariables.success_prefix + "Loaded home " + j + "!");
+                // KeiichisCore.getPlugin().getServer().broadcastMessage(GlobalVariables.success_prefix + "Loaded home " + j + "!");
             }
         }
     }

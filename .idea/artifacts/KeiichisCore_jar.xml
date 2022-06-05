@@ -3,7 +3,11 @@
     <output-path>$PROJECT_DIR$/../..</output-path>
     <root id="archive" name="KeiichisCore.jar">
       <element id="module-output" name="KeiichisCore" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../Dependencies/guava-30.1.1-jre.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../Dependencies/ProtocolLib.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../Dependencies/api-5.4.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$PROJECT_DIR$/../Dependencies/spigot-api.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../Dependencies/commons-lang3-3.12.0.jar" path-in-jar="/" />
     </root>
   </artifact>
 </component>

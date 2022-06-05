@@ -16,13 +16,21 @@ public class GlobalVariables {
     public static String player_join = "§8[§a+§8] <player>";
     public static String player_leave = "§8[§c-§8] <player>";
 
-    public static String title = "[Cherry] ";
+    public static String title = "[Keiichi] ";
 
     public static boolean spawn_loaded = false;
     public static Location spawn_location;
 
+    public static HashMap<String, String> player_facing = new HashMap<String, String>();
+
     public static HashMap<String, String> player_titles = new HashMap<String, String>();
     public static HashMap<String, ClassChatPalette> player_chat_palettes = new HashMap<String, ClassChatPalette>();
+
+    public static HashMap<String, String> player_pronouns = new HashMap<String, String>();
+    public static HashMap<String, String> player_color_pronouns = new HashMap<String, String>();
+
+    public static HashMap<String, ClassChatPalette> group_palettes = new HashMap<>();
+    public static HashMap<String, String> group_prefixes = new HashMap<>();
 
     public static HashMap<String, String> player_chat_input = new HashMap<String, String>();
 
@@ -58,6 +66,39 @@ public class GlobalVariables {
         letter_lookup.put("x", "\uEf24");
         letter_lookup.put("y", "\uEf25");
         letter_lookup.put("z", "\uEf26");
+        letter_lookup.put("A", "\uEe01");
+        letter_lookup.put("B", "\uEe02");
+        letter_lookup.put("C", "\uEe03");
+        letter_lookup.put("D", "\uEe04");
+        letter_lookup.put("E", "\uEe05");
+        letter_lookup.put("F", "\uEe06");
+        letter_lookup.put("G", "\uEe07");
+        letter_lookup.put("H", "\uEe08");
+        letter_lookup.put("I", "\uEe09");
+        letter_lookup.put("J", "\uEe10");
+        letter_lookup.put("K", "\uEe11");
+        letter_lookup.put("L", "\uEe12");
+        letter_lookup.put("M", "\uEe13");
+        letter_lookup.put("N", "\uEe14");
+        letter_lookup.put("O", "\uEe15");
+        letter_lookup.put("P", "\uEe16");
+        letter_lookup.put("Q", "\uEe17");
+        letter_lookup.put("R", "\uEe18");
+        letter_lookup.put("S", "\uEe19");
+        letter_lookup.put("T", "\uEe20");
+        letter_lookup.put("U", "\uEe21");
+        letter_lookup.put("V", "\uEe22");
+        letter_lookup.put("W", "\uEe23");
+        letter_lookup.put("X", "\uEe24");
+        letter_lookup.put("Y", "\uEe25");
+        letter_lookup.put("Z", "\uEe26");
+        letter_lookup.put("/", "\uEF72");
+
+        group_prefixes.put("default", null);
+        group_prefixes.put("staff", "Staff");
+
+        group_palettes.put("default", new ClassChatPalette("7", "7", "7"));
+        group_palettes.put("staff", new ClassChatPalette("9", "7", "f"));
 
         Bukkit.getConsoleSender().sendMessage(GlobalVariables.alert_prefix + "Loading Spawn...");
         World world = Bukkit.getWorld(KeiichisCore.getPlugin().getConfig().getString("Spawn.W"));

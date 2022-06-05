@@ -1,10 +1,13 @@
 package com.willmexe.keiichiscore;
 
 import com.willmexe.keiichiscore.classes.ClassHome;
+import com.willmexe.keiichiscore.classes.ClassPronouns;
 import com.willmexe.keiichiscore.commands.*;
 import com.willmexe.keiichiscore.events.*;
+import com.willmexe.keiichiscore.gui.GuiSetPronouns;
 import com.willmexe.keiichiscore.gui.GuiCraftBook;
 import com.willmexe.keiichiscore.items.ItemCraftBook;
+import com.willmexe.keiichiscore.tabcompletes.TabCompleterGiveProp;
 import com.willmexe.keiichiscore.tabcompletes.TabCompleterGoHome;
 import com.willmexe.keiichiscore.tabcompletes.TabCompleterRemoveHome;
 import org.bukkit.Bukkit;
@@ -41,22 +44,37 @@ public class KeiichisCore extends JavaPlugin {
         getCommand("setspawn").setExecutor(new CommandSetSpawn());
         getCommand("loadconfig").setExecutor(new CommandLoadConfig());
 
+        getCommand("setfacing").setExecutor(new CommandSetFacing());
+        getCommand("giveprop").setExecutor(new CommandGiveProp());
+
         getCommand("save").setExecutor(new CommandSave());
+        getCommand("prefixsync").setExecutor(new CommandPrefixSync());
+        getCommand("loadresources").setExecutor(new CommandLoadResources());
 
         getCommand("craft").setExecutor(new CommandCraft());
 
+        getCommand("pronouns").setExecutor(new CommandPronouns());
+        getCommand("syncpronouns").setExecutor(new CommandPronounsSync());
+
         getCommand("gohome").setTabCompleter(new TabCompleterGoHome());
         getCommand("removehome").setTabCompleter(new TabCompleterRemoveHome());
+
+        getCommand("giveprop").setTabCompleter(new TabCompleterGiveProp());
 
         getServer().getPluginManager().registerEvents(new EventsInventory(), this);
         getServer().getPluginManager().registerEvents(new EventsChat(), this);
         getServer().getPluginManager().registerEvents(new EventsPlayerJoin(), this);
         getServer().getPluginManager().registerEvents(new EventsPlayerSpawn(), this);
         getServer().getPluginManager().registerEvents(new EventsPlayerPlaceBlock(), this);
+        getServer().getPluginManager().registerEvents(new EventsPlayerInteract(), this);
 
         GlobalVariables.init();
         ItemCraftBook.init();
         GuiCraftBook.init();
+        GuiSetPronouns.init();
+        CommandGiveProp.init();
+
+        CommandPrefixSync.syncPrefixes();
 
         GuiCraftBook.add("§fBuilder's Wand", Material.NETHERITE_AXE, "\uEFD8");
 
@@ -76,10 +94,10 @@ public class KeiichisCore extends JavaPlugin {
         var pathstr = String.join("\\", new_patharr) + "\\";
 
         try {
-            Bukkit.getConsoleSender().sendMessage(GlobalVariables.alert_prefix + "Loading Config...");
+            // Bukkit.getConsoleSender().sendMessage(GlobalVariables.alert_prefix + "Loading Config...");
             getPlugin().getConfig().load(pathstr + "KeiichisCore\\config.yml");
-            Bukkit.broadcastMessage(pathstr + "KeiichisCore\\config.yml");
-            Bukkit.getConsoleSender().sendMessage(GlobalVariables.success_prefix + "Loaded Config!");
+            // Bukkit.broadcastMessage(pathstr + "KeiichisCore\\config.yml");
+            // Bukkit.getConsoleSender().sendMessage(GlobalVariables.success_prefix + "Loaded Config!");
         } catch (IOException e) {
             e.printStackTrace();
         } catch (InvalidConfigurationException e) {
@@ -88,6 +106,7 @@ public class KeiichisCore extends JavaPlugin {
 
         all_players = (List<String>) getPlugin().getConfig().getList("all_players");
         ClassHome.loadHomes();
+        ClassPronouns.loadPronouns();
     }
 
     @Override
@@ -106,6 +125,7 @@ public class KeiichisCore extends JavaPlugin {
         getPlugin().getConfig().set("all_players", all_players);
 
         ClassHome.saveHomes();
+        ClassPronouns.savePronouns();
         GlobalVariables.save();
 
         getPlugin().saveConfig();

@@ -2,8 +2,8 @@ package com.willmexe.keiichiscore.events;
 
 import com.willmexe.keiichiscore.GlobalVariables;
 import com.willmexe.keiichiscore.classes.ClassHome;
+import com.willmexe.keiichiscore.classes.ClassPronouns;
 import com.willmexe.keiichiscore.gui.*;
-import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -69,6 +69,39 @@ public class EventsInventory implements Listener {
             }
         } else if (e.getView().getTitle() == GuiCraftBook.gui_title) {
             e.setCancelled(true);
+        } else if(e.getView().getTitle() == GuiPronouns.gui_title) {
+            e.setCancelled(true);
+            if(e.getSlot() == 1) {
+                player.openInventory(GuiSetPronouns.getInventory());
+            } else if(e.getSlot() == 2) {
+                GlobalVariables.player_chat_input.put(player.getUniqueId().toString(), "custom_pronoun_color");
+                player.sendMessage(GlobalVariables.alert_prefix + "Type the new pronoun color in chat using the minecraft color system (§11, §22, §33, §ff, §cc, §dd§e). misuse of this command will result in a one week penalty:");
+                player.closeInventory();
+            }
+        } else if(e.getView().getTitle() == GuiSetPronouns.gui_title) {
+            e.setCancelled(true);
+            String set_pronoun = null;
+            if(e.getSlot() == 0) {
+                set_pronoun = "He/Him";
+            } else if(e.getSlot() == 1) {
+                set_pronoun = "She/Her";
+            } else if(e.getSlot() == 2) {
+                set_pronoun = "They/Them";
+            } else if(e.getSlot() == 3) {
+                set_pronoun = "It/Its";
+            } else if(e.getSlot() == 4) {
+                set_pronoun = "Any";
+            } else if(e.getSlot() == 8) {
+                GlobalVariables.player_chat_input.put(player.getUniqueId().toString(), "custom_pronoun");
+                player.sendMessage(GlobalVariables.alert_prefix + "Type the new pronoun in chat:");
+                player.closeInventory();
+            }
+            if(set_pronoun != null) {
+                GlobalVariables.player_pronouns.put(player.getUniqueId().toString(), set_pronoun);
+                player.sendMessage(GlobalVariables.success_prefix + "Your global pronouns are now '" + set_pronoun + "'!");
+                ClassPronouns.setPronouns(player);
+                player.closeInventory();
+            }
         }
     }
 }

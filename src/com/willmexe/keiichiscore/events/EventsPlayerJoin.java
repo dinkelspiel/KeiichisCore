@@ -4,6 +4,10 @@ import com.willmexe.keiichiscore.KeiichisCore;
 import com.willmexe.keiichiscore.GlobalVariables;
 import com.willmexe.keiichiscore.KeiichisCore;
 import com.willmexe.keiichiscore.classes.ClassChatPalette;
+import com.willmexe.keiichiscore.classes.ClassPronouns;
+import com.willmexe.keiichiscore.commands.CommandChatPallete;
+import com.willmexe.keiichiscore.commands.CommandChatTitle;
+import com.willmexe.keiichiscore.commands.CommandPrefixSync;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -16,7 +20,14 @@ public class EventsPlayerJoin implements Listener {
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent e) {
         Player player = e.getPlayer();
-        player.setResourcePack("https://github.com/shykeiichi/plugin-resourcepack/blob/main/release.zip?raw=true");
+
+        if(!player.hasPermission("keiichiscore.loadresources"))
+            player.setResourcePack("https://github.com/shykeiichi/plugin-resourcepack/blob/main/release.zip?raw=true");
+
+        CommandPrefixSync.setPlayerPrefix(player);
+        CommandChatPallete.setChatPalette(player, GlobalVariables.group_palettes.get(CommandPrefixSync.getPlayerGroup(player)));
+        ClassPronouns.setPronouns(player);
+
         if(GlobalVariables.player_chat_palettes.get(player.getUniqueId().toString()) == null) {
             GlobalVariables.player_chat_palettes.put(player.getUniqueId().toString(), new ClassChatPalette("§f", "§f", "§f"));
         }
